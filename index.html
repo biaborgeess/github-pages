@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beatriz | GitHub Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0c10;
+      --bg2: #0f1117;
+      --bg3: #161b22;
+      --border: #21262d;
+      --border2: #30363d;
+      --green: #3fb950;
+      --green2: #2ea043;
+      --blue: #58a6ff;
+      --purple: #bc8cff;
+      --orange: #e3b341;
+      --text: #e6edf3;
+      --text2: #8b949e;
+      --text3: #484f58;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* grid bg */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(48,54,61,0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(48,54,61,0.3) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 48px;
+      font-size: 12px;
+      color: var(--text3);
+    }
+    .topbar .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .topbar .red { background: #ff5f57; }
+    .topbar .yellow { background: #ffbd2e; }
+    .topbar .green-dot { background: #28c840; }
+    .topbar .path { color: var(--text3); margin-left: 12px; }
+    .topbar .path span { color: var(--blue); }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: start;
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tag-line {
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 6vw, 58px);
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    h1 .accent { color: var(--green); }
+
+    .bio {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text2);
+      max-width: 480px;
+      margin-bottom: 28px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid;
+      letter-spacing: 0.5px;
+    }
+    .badge.g { color: var(--green); border-color: var(--green2); background: rgba(46,160,67,0.08); }
+    .badge.b { color: var(--blue); border-color: #1f6feb; background: rgba(31,111,235,0.1); }
+    .badge.p { color: var(--purple); border-color: #6e40c9; background: rgba(110,64,201,0.1); }
+    .badge.o { color: var(--orange); border-color: #9e6a03; background: rgba(158,106,3,0.1); }
+
+    .links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      text-decoration: none;
+      transition: all 0.18s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--green2);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--green); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border2);
+    }
+    .btn-ghost:hover { border-color: var(--text2); background: var(--bg3); }
+
+    /* AVATAR */
+    .avatar-wrap {
+      position: relative;
+    }
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid var(--border2);
+      background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--green);
+      position: relative;
+      overflow: hidden;
+    }
+    .avatar::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      background: conic-gradient(var(--green) 0deg, transparent 120deg, var(--blue) 240deg, transparent 360deg);
+      z-index: -1;
+      animation: spin 6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .status {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 3px solid var(--bg);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(63,185,80,0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(63,185,80,0); }
+    }
+
+    /* STATS ROW */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .stat-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      transition: border-color 0.2s;
+    }
+    .stat-card:hover { border-color: var(--border2); }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .stat-val {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .stat-val .unit { font-size: 12px; color: var(--text2); margin-left: 2px; }
+
+    /* SECTION */
+    .section { margin-bottom: 40px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .section-header .line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section-title {
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* REPOS */
+    .repos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+    }
+
+    .repo-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .repo-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .repo-name {
+      font-size: 14px;
+      color: var(--blue);
+      font-weight: 500;
+    }
+
+    .repo-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .repo-footer {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      color: var(--text3);
+    }
+
+    .lang-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    /* CONTRIBUTION GRAPH */
+    .contrib-grid {
+      display: flex;
+      gap: 3px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .contrib-week {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .contrib-day {
+      width: 11px;
+      height: 11px;
+      border-radius: 2px;
+      background: var(--border);
+    }
+    .contrib-day.l1 { background: #0e4429; }
+    .contrib-day.l2 { background: #006d32; }
+    .contrib-day.l3 { background: #26a641; }
+    .contrib-day.l4 { background: #39d353; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 8px;
+    }
+
+    .skill-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 8px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text2);
+      transition: all 0.18s;
+    }
+    .skill-item:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(46,160,67,0.06);
+    }
+    .skill-icon { font-size: 18px; margin-bottom: 4px; display: block; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      font-size: 11px;
+      color: var(--text3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+    }
+    footer span { color: var(--green); }
+
+    /* TYPING CURSOR */
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--green);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    @media (max-width: 600px) {
+      .hero { grid-template-columns: 1fr; }
+      .avatar-wrap { order: -1; }
+      .avatar { width: 80px; height: 80px; font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="dot red"></div>
+    <div class="dot yellow"></div>
+    <div class="dot green-dot"></div>
+    <div class="path">~/users/<span>biaborgeess</span>/profile.md</div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="tag-line">// desenvolvedor · github pages</div>
+      <h1>Beatriz<br><span class="accent">Borges</span><span class="cursor"></span></h1>
+      <p class="bio">
+        Olá! Sou a Beatriz, apaixonada por tecnologia e desenvolvimento.
+        Aqui você encontra meus projetos, contribuições e tudo que estou
+        construindo. Sempre aprendendo, sempre evoluindo.
+      </p>
+      <div class="badges">
+        <span class="badge g">Open Source</span>
+        <span class="badge b">Web Dev</span>
+        <span class="badge p">GitHub Pages</span>
+        <span class="badge o">Always Learning</span>
+      </div>
+      <div class="links">
+        <a class="btn btn-primary" href="https://github.com/biaborgeess" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.748 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          @biaborgeess
+        </a>
+        <a class="btn btn-ghost" href="mailto:beatriz@email.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contato
+        </a>
+      </div>
+    </div>
+    <div class="avatar-wrap">
+      <div class="avatar">B</div>
+      <div class="status"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Repositórios</div>
+      <div class="stat-val" id="repos-count">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Seguidores</div>
+      <div class="stat-val" id="followers-count">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Seguindo</div>
+      <div class="stat-val" id="following-count">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Status</div>
+      <div class="stat-val" style="font-size:14px; color: var(--green);">● Online</div>
+    </div>
+  </div>
+
+  <!-- REPOS -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">Repositórios em destaque</span>
+      <div class="line"></div>
+    </div>
+    <div class="repos">
+      <a class="repo-card" href="https://github.com/biaborgeess/github-pages" target="_blank">
+        <div class="repo-name">📁 github-pages</div>
+        <div class="repo-desc">Meu site pessoal hospedado no GitHub Pages. Portfólio e perfil profissional.</div>
+        <div class="repo-footer">
+          <span><span class="lang-dot" style="background:#f1e05a"></span>HTML</span>
+          <span>⭐ 0</span>
+          <span>🍴 0</span>
+        </div>
+      </a>
+      <a class="repo-card" href="https://github.com/biaborgeess" target="_blank">
+        <div class="repo-name">📁 projetos</div>
+        <div class="repo-desc">Explore todos os projetos e experimentos no meu perfil do GitHub.</div>
+        <div class="repo-footer">
+          <span><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span>⭐ —</span>
+        </div>
+      </a>
+      <a class="repo-card" href="https://github.com/biaborgeess" target="_blank">
+        <div class="repo-name">📁 em construção</div>
+        <div class="repo-desc">Novos projetos chegando em breve. Fique de olho nas atualizações!</div>
+        <div class="repo-footer">
+          <span><span class="lang-dot" style="background:#e34c26"></span>HTML/CSS</span>
+          <span>⭐ —</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTRIBUTION GRAPH -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">Contribuições</span>
+      <div class="line"></div>
+    </div>
+    <div class="contrib-grid" id="contrib-grid"></div>
+    <p style="font-size:10px; color: var(--text3); margin-top: 8px;">Atividade nos últimos 6 meses</p>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">Tecnologias</span>
+      <div class="line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item"><span class="skill-icon">🌐</span>HTML</div>
+      <div class="skill-item"><span class="skill-icon">🎨</span>CSS</div>
+      <div class="skill-item"><span class="skill-icon">⚡</span>JavaScript</div>
+      <div class="skill-item"><span class="skill-icon">🐍</span>Python</div>
+      <div class="skill-item"><span class="skill-icon">🐙</span>Git</div>
+      <div class="skill-item"><span class="skill-icon">📦</span>GitHub</div>
+      <div class="skill-item"><span class="skill-icon">🖥️</span>Terminal</div>
+      <div class="skill-item"><span class="skill-icon">📱</span>Responsive</div>
+      <div class="skill-item"><span class="skill-icon">🚀</span>Deploy</div>
+      <div class="skill-item"><span class="skill-icon">🔧</span>VS Code</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>biaborgeess.github.io</span>
+    <span>feito com <span>❤</span> e muitas linhas de código</span>
+  </footer>
+
+</div>
+
+<script>
+  // Contribution graph
+  const grid = document.getElementById('contrib-grid');
+  const levels = ['', 'l1', 'l2', 'l3', 'l4'];
+  for (let w = 0; w < 26; w++) {
+    const week = document.createElement('div');
+    week.className = 'contrib-week';
+    for (let d = 0; d < 7; d++) {
+      const day = document.createElement('div');
+      const r = Math.random();
+      day.className = 'contrib-day ' + (r < 0.5 ? '' : r < 0.7 ? 'l1' : r < 0.85 ? 'l2' : r < 0.94 ? 'l3' : 'l4');
+      week.appendChild(day);
+    }
+    grid.appendChild(week);
+  }
+
+  // GitHub API stats
+  fetch('https://api.github.com/users/biaborgeess')
+    .then(r => r.json())
+    .then(data => {
+      if (data.public_repos !== undefined) {
+        document.getElementById('repos-count').textContent = data.public_repos;
+        document.getElementById('followers-count').textContent = data.followers;
+        document.getElementById('following-count').textContent = data.following;
+      }
+    })
+    .catch(() => {});
+</script>
+</body>
+</html>
